@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL History</title>
+
+    <!-- Custom Css -->
+    <link rel="stylesheet" href="/navlinks.css">
+
+    <!-- FontAwesome 5 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+    <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <nav>
+        <div class="logo">
+            <i class="bx bx-menu menu-icon"></i>
+            <span class="logo-name">shortify</span>
+        </div>
+        <div class="sidebar">
+            <div class="logo">
+                <span class="logo-name"> Hi, <%= user.username %> </span>
+            </div>
+            <div class="sidebar-content">
+                <ul class="lists">
+                    <li class="list">
+                        <a href="/api/shortify" class="nav-link">
+                            <i class="bx bx-home-alt icon"></i>
+                            <span class="link">Home</span>
+                        </a>
+                    </li>
+                    <li class="list">
+                        <a href="/api/dashboard" class="nav-link">
+                            <i class="fa fa-user-circle icon"></i>
+                            <span class="link">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="list">
+                        <a href="/api/shortify/history" class="nav-link">
+                            <i class="bx bx-folder-open icon"></i>
+                            <span class="link">URL History</span>
+                        </a>
+                    </li>
+                    <li class="list">
+                        <a href="/api/shortify/analytics" class="nav-link">
+                            <i class="bx bx-pie-chart-alt-2 icon"></i>
+                            <span class="link">Analytics</span>
+                        </a>
+                    </li>
+                    <li class="list">
+                        <a href="/api/user/update/:id" class="nav-link">
+                            <i class="bx bx-cog icon"></i>
+                            <span class="link">Settings</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="bottom-cotent">
+                    <li class="list">
+                        <a href="/logout" class="nav-link">
+                            <i class="bx bx-log-out icon"></i>
+                            <span class="link">Logout</span>
+                        </a>
+                    </li>
+                    <li class="list">
+                        <a href="/api/user/delete/:id" class="nav-link">
+                            <i class="bx bx-log-out icon"></i>
+                            <span class="link">Deactivate</span>
+                        </a>
+                    </li>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <section class="overlay"></section>
+    <!-- End -->
+
+    <!-- Main -->
+    <div>
+        <div>
+            <div>
+                <p style="color: rgb(255, 0, 0);"><%= urlFlash %>
+                </p>
+                <i class="bx bx-folder-open icon">URL HISTORY </i>
+                <table class="histtable">
+                    <thead>
+                        <tr style="font-weight:900;">
+                            <th scope="col">Original URL</th>
+                            <th scope="col">Short URL</th>
+                            <th scope="col">Created</th>
+                        </tr>
+                    </thead>
+                    <% for (var i=0; i < url.length; i++) { %>
+                        <% let splitOrig1=url[i].origUrl.split("/", 3).join("/") %>
+                            <% let origUrl=splitOrig1[1] %>
+                                <tbody>
+                                    <tr>
+                                        <td data-label="Original URL:">
+                                            &nbsp; &nbsp;
+                                            <%= splitOrig1%>
+                                        </td>
+                                        <td data-label="Short URL:">
+                                            &nbsp; &nbsp;
+                                            <a href="<%= url[i].historyUrl%> ">
+                                                <%= url[i].historyUrl%>
+                                            </a>
+                                        </td>
+                                        <td data-label="Created:">
+                                            &nbsp; &nbsp;
+                                            <%= url[i].createdAt%>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <% } %>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- End -->
+    <script src="/navlinks.js"></script>
+</body>
+
+</html>

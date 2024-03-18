@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link rel="stylesheet" href="/home.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <nav>
+        <div class="logo">
+            <i class="bx bx-menu menu-icon"></i>
+            <span class="logo-name">shortify</span>
+        </div>
+        <div class="sidebar">
+            <div class="logo">
+                <span class="logo-name"> Hi, <%= user.username %> </span>
+            </div>
+            <div class="sidebar-content">
+                <ul class="lists">
+                    <li class="list">
+                        <a href="/api/shortify" class="nav-link">
+                            <i class="bx bx-home-alt icon"></i>
+                            <span class="link">Home</span>
+                        </a>
+                    </li>
+                    <li class="list">
+                        <a href="/api/dashboard" class="nav-link">
+                            <i class="fa fa-user-circle icon"></i>
+                            <span class="link">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="list">
+                        <a href="/api/shortify/history" class="nav-link">
+                            <i class="bx bx-folder-open icon"></i>
+                            <span class="link">URL History</span>
+                        </a>
+                    </li>
+                    <li class="list">
+                        <a href="/api/shortify/analytics" class="nav-link">
+                            <i class="bx bx-pie-chart-alt-2 icon"></i>
+                            <span class="link">Analytics</span>
+                        </a>
+                    </li>
+                    <li class="list">
+                        <a href="/api/user/update/:id" class="nav-link">
+                            <i class="bx bx-cog icon"></i>
+                            <span class="link">Settings</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="bottom-cotent">
+                    <li class="list">
+                        <a href="/logout" class="nav-link">
+                            <i class="bx bx-log-out icon"></i>
+                            <span class="link">Logout</span>
+                        </a>
+                    </li>
+                    <li class="list">
+                        <a href="/api/user/delete/:id" class="nav-link">
+                            <i class="bx bx-log-out icon"></i>
+                            <span class="link">Deactivate</span>
+                        </a>
+                    </li>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <section class="overlay"></section>
+    <section class="features" id="features">
+        <div class="container">
+            <!-- Short URL Feature -->
+            <div class="url-shorten-feature">
+                <form action="/api/shortify" method="post" class="url-shorten-form" id="url-shorten-form">
+                    <div>
+                        <p style="color: rgb(216, 25, 25); font-variant: small-caps;">
+                            <%= invalidFlash %>
+                                <input type="text" class="url-input" placeholder="Shorten a link here..." name="origUrl"
+                                    autocomplete="off" />
+                        </p>
+                    </div>
+                    <input type="text" class="url-input-span" placeholder="Customize short link?" name="customId">
+                    <button type="submit" class="btn btn-lg btn-plus-icon">shorten it!</button>
+                </form>
+                <div class="url-shorten-results">
+                    <div class="url-shorten-result" id='${id}'>
+                        <div class="old-url">
+                            <p>your generated link is:</p>
+                        </div>
+                        <div class="new-url">
+                            <div class="container">
+
+                            </div>
+                            <div class="options">
+                                <button type="button" class="copy-new-url btn btn-sm scale-effect">
+                                    Copy
+                                </button>
+                                <button type="button" class="delete-url scale-effect">
+                                    Clear
+                                </button>
+                            </div>
+                        </div>
+    </section>
+    <script src="/home.js"></script>
+</body>
+
+</html>

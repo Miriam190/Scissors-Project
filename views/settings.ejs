@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Settings</title>
+    <link rel="stylesheet" href="/navlinks.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+    <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" />
+</head>
+
+<body>
+    <nav>
+        <div class="logo">
+            <i class="bx bx-menu menu-icon"></i>
+            <span class="logo-name">shortify</span>
+        </div>
+        <div class="sidebar">
+            <div class="logo">
+                <span class="logo-name"> Hi, <%= user.username %> </span>
+            </div>
+            <div class="sidebar-content">
+                <ul class="lists">
+                    <li class="list">
+                        <a href="/api/shortify" class="nav-link">
+                            <i class="bx bx-home-alt icon"></i>
+                            <span class="link">Home</span>
+                        </a>
+                    </li>
+                    <li class="list">
+                        <a href="/api/dashboard" class="nav-link">
+                            <i class="fa fa-user-circle icon"></i>
+                            <span class="link">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="list">
+                        <a href="/api/shortify/history" class="nav-link">
+                            <i class="bx bx-folder-open icon"></i>
+                            <span class="link">URL History</span>
+                        </a>
+                    </li>
+                    <li class="list">
+                        <a href="/api/shortify/analytics" class="nav-link">
+                            <i class="bx bx-pie-chart-alt-2 icon"></i>
+                            <span class="link">Analytics</span>
+                        </a>
+                    </li>
+                    <li class="list">
+                        <a href="/api/user/update/:id" class="nav-link">
+                            <i class="bx bx-cog icon"></i>
+                            <span class="link">Settings</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="bottom-cotent">
+                    <li class="list">
+                        <a href="/logout" class="nav-link">
+                            <i class="bx bx-log-out icon"></i>
+                            <span class="link">Logout</span>
+                        </a>
+                    </li>
+                    <li class="list">
+                        <a href="/api/user/delete/:id" class="nav-link">
+                            <i class="bx bx-log-out icon"></i>
+                            <span class="link">Deactivate</span>
+                        </a>
+                    </li>
+
+                </div>
+            </div>
+        </div>
+    </nav>
+    <section class="overlay"></section>
+    <form action="/api/user/update/<%= user.id %>" method="post" class="form">
+        <div id="body" class="wrapper bg-white mt-sm-5">
+            <h4 class="pb-4 border-bottom">Account settings</h4>
+            <div class="d-flex align-items-start py-3 border-bottom">
+                <img src="https://images.pexels.com/photos/1037995/pexels-photo-1037995.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                    class="img" alt="">
+                <div class="pl-sm-4 pl-2" id="img-section">
+                    <b>Profile Photo</b><button class="btn button border"><b>Upload</b></button>
+                    <p>Accepted file type .png. Less than 1MB</p>
+                </div>
+            </div>
+            <div >
+                <div class="row py-2">
+                    <div class="col-md-6">
+                        <label for="username">Username</label>
+                        &nbsp; &nbsp;
+                        <input type="text" name="username" class="bg-light form-control" value="<%= user.username %>">
+                    </div>
+                    &nbsp; &nbsp;
+                    <div class="col-md-6 pt-md-0 pt-3" class="field email-field">
+                        <label for="email">Email</label>
+                        &nbsp; &nbsp;
+                        <input type="text" class="email" name="email" class="bg-light form-control" value="<%= user.email %>">
+                        <span class="error email-error">
+                            <p class="error-text">Enter a valid email</p>
+                        </span>
+                    </div>
+                    &nbsp; &nbsp;
+                </div>
+                <!-- <div class="row py-2">
+                    <div class="col-md-6" class="field create-password">
+                        <label for="password">Password</label>
+                        &nbsp; &nbsp;
+                        <input type="text" class="password" name="password" class="bg-light form-control" value="<%= user.password %>">
+                        <span class="error password-error">
+                            <p class="error-text">
+                                Password must have atleast 8 characters and contain atleast one uppercase, a number and a symbol.
+                            </p>
+                        </span>
+                    </div>
+                    &nbsp; &nbsp;
+                </div> -->
+                <p style="color: rgb(0, 47, 255);">
+                    <%= updateFlash %>
+                </p>
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                <div class="py-3 pb-4 border-bottom">
+                    <button name="Submit" value="Edit" type="submit" id="submit-btn" class="btn btn-primary mr-3">Save
+                        Changes</button>
+                    &nbsp; &nbsp;
+                   <button class="btn border button" onclick="location.href='/api/shortify'">Cancel</button>
+                    <input type="hidden" name="_method" value="PUT" />
+                </div>
+
+            </div>
+        </div>
+
+
+    </form>
+
+    <script src="/navlinks.js"></script>
+
+</body>
+
+</html>

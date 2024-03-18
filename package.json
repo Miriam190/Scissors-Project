@@ -1,0 +1,51 @@
+{
+  "name": "shortify",
+  "version": "1.0.0",
+  "description": "A URL shortener",
+  "main": "app.js",
+  "scripts": {
+    "dev": "set NODE_ENV=development&&  nodemon app.js",
+    "start": "set NODE_ENV=production&&  node app.js",
+    "test": "set NODE_ENV=test&& jest --runInBand --detectOpenHandles --testTimeout=30000",
+    "test:watch": "npm run test -- --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AnthoniaNwanya/shortify.git"
+  },
+  "author": "Tonia",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AnthoniaNwanya/shortify/issues"
+  },
+  "homepage": "https://github.com/AnthoniaNwanya/shortify#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^3.2.0",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "express-rate-limit": "^6.7.0",
+    "express-session": "^1.17.3",
+    "ip": "^2.0.0",
+    "jsonwebtoken": "^9.0.0",
+    "mongodb": "^5.6.0",
+    "mongodb-memory-server": "^8.12.2",
+    "mongoose": "^7.0.2",
+    "nanoid": "^3.3.4",
+    "qrcode": "^1.5.3",
+    "redis": "^4.6.7",
+    "validator": "^13.9.0"
+  },
+  "devDependencies": {
+    "jest": "^29.5.0",
+    "nodemon": "^2.0.22",
+    "redis-mock": "^0.56.3",
+    "scriptlint": "^3.0.0",
+    "supertest": "^6.3.3"
+  }
+}

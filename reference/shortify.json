@@ -1,0 +1,882 @@
+{
+  "openapi": "3.1.0",
+  "x-stoplight": {
+    "id": "n7mqyhg2yow3r"
+  },
+  "info": {
+    "title": "shortify",
+    "version": "1.0",
+    "summary": "A URL shortener",
+    "description": "This API allows users to generate and customize shorter versions of their long urls. Shortify  allows users to get a history of short urls generated overtime. Users can also see analytics of how many clicks their generated links have received, and the IP addresses of where the clicks are coming from.\n\nTo get started, Users must signup and login to get authentication before making requests."
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8000",
+      "description": "dev"
+    },
+    {
+      "url": "https://tittle.onrender.com",
+      "description": "prod"
+    }
+  ],
+  "paths": {
+    "/": {
+      "post": {
+        "summary": "Signup User",
+        "operationId": "post-signup",
+        "responses": {
+          "302": {
+            "description": "Redirecting to /login",
+            "content": {}
+          }
+        },
+        "description": "This path creates user account",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "4gl9sun6m3d8m"
+                    }
+                  },
+                  "email": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "2s9ghb9p52zha"
+                    }
+                  },
+                  "password": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "k7jx8qnu01ptk"
+                    }
+                  },
+                  "cPassword": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "kevbelddki0cz"
+                    }
+                  }
+                },
+                "required": [
+                  "username",
+                  "email",
+                  "password",
+                  "cPassword"
+                ]
+              }
+            }
+          },
+          "description": "{\n\"username\": \"Teeya\",\n\"email\": \"tonianwanya@yahoo.com\",\n\"password\": \"Teeya22.\",\n\"cPassword\": \"Teeya22.\"\n\n}"
+        },
+        "tags": [
+          "User endpoints"
+        ]
+      },
+      "parameters": []
+    },
+    "/login": {
+      "post": {
+        "summary": "Login User",
+        "operationId": "post-login",
+        "responses": {
+          "302": {
+            "description": "Found Redirecting to /api/shortify",
+            "content": {}
+          }
+        },
+        "description": "Login a user to get authentication",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "7bl5donojlepa"
+                    }
+                  },
+                  "password": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "nv9ixui53l91c"
+                    }
+                  }
+                },
+                "required": [
+                  "email",
+                  "password"
+                ]
+              }
+            }
+          },
+          "description": "{\n\"email\": \"tonianwanya@yahoo.com\",\n\"password\": \"teeya22@\"\n}"
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "cookie",
+            "description": "token authentication"
+          }
+        ],
+        "tags": [
+          "User endpoints"
+        ]
+      }
+    },
+    "/api/user": {
+      "get": {
+        "summary": "Get All Users",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "_id": {
+                            "type": "string"
+                          },
+                          "username": {
+                            "type": "string"
+                          },
+                          "email": {
+                            "type": "string"
+                          },
+                          "URLS": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "createdAt": {
+                            "type": "string"
+                          },
+                          "__v": {
+                            "type": "integer"
+                          },
+                          "updatedAt": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "x-examples": {
+                    "Example 1": {
+                      "success": true,
+                      "status": "success",
+                      "statusCode": 200,
+                      "data": [
+                        {
+                          "_id": "64919bbe9d3654b7d6402d15",
+                          "username": "Tee",
+                          "email": "tonianwanya@yahoo.com",
+                          "URLS": [
+                            "http://localhost:8000/9ePLm",
+                            "http://localhost:8000/-NkC2",
+                            "http://localhost:8000/ZzNlD",
+                            "http://localhost:8000/HEqYm",
+                            "http://localhost:8000/T_r0D",
+                            "http://localhost:8000/aUZQm",
+                            "http://localhost:8000/2SkTA"
+                          ],
+                          "createdAt": "Tue Jun 20 2023 13:29:50 GMT+0100 (West Africa Standard Time)",
+                          "__v": 7
+                        },
+                        {
+                          "_id": "6491a55ac7d4b36050eb0ae1",
+                          "username": "Jojo",
+                          "email": "josiahademeso@gmail.com",
+                          "URLS": [],
+                          "createdAt": "Tue Jun 20 2023 13:10:50 GMT+0000 (Coordinated Universal Time)",
+                          "__v": 0
+                        },
+                        {
+                          "_id": "6492ed7d0257cf2601896c9a",
+                          "username": "Klint",
+                          "email": "anosikeprosper2@gmail.com",
+                          "URLS": [
+                            "http://localhost:8000/khGbf"
+                          ],
+                          "createdAt": "Wed Jun 21 2023 12:30:53 GMT+0000 (Coordinated Universal Time)",
+                          "__v": 1
+                        },
+                        {
+                          "_id": "6492ee2e0257cf2601896ca9",
+                          "username": "jummy02",
+                          "email": "kennydemola2@gmail.com",
+                          "URLS": [
+                            "http://localhost:8000/guru"
+                          ],
+                          "createdAt": "Wed Jun 21 2023 12:33:50 GMT+0000 (Coordinated Universal Time)",
+                          "__v": 1
+                        },
+                        {
+                          "_id": "6492eeca0257cf2601896ccc",
+                          "username": "lambo",
+                          "email": "catherinesteven781@gmail.com",
+                          "URLS": [
+                            "http://localhost:8000/https://tittle.onrender.com/api/shortify"
+                          ],
+                          "createdAt": "Wed Jun 21 2023 12:36:26 GMT+0000 (Coordinated Universal Time)",
+                          "__v": 1
+                        },
+                        {
+                          "_id": "6492ef250257cf2601896ce8",
+                          "username": "alialaba",
+                          "email": "alidodocode@gmail.com",
+                          "URLS": [
+                            "http://localhost:8000/oo-wc"
+                          ],
+                          "createdAt": "Wed Jun 21 2023 12:37:57 GMT+0000 (Coordinated Universal Time)",
+                          "__v": 1
+                        },
+                        {
+                          "_id": "6492ef3f0257cf2601896cf3",
+                          "username": "Yusuf",
+                          "email": "anikiyusuf@gmail.com",
+                          "URLS": [
+                            "http://localhost:8000/I9hVQ",
+                            "http://localhost:8000/mKmxg"
+                          ],
+                          "createdAt": "Wed Jun 21 2023 12:38:23 GMT+0000 (Coordinated Universal Time)",
+                          "__v": 2,
+                          "updatedAt": "Wed Jun 21 2023 12:44:18 GMT+0000 (Coordinated Universal Time)"
+                        },
+                        {
+                          "_id": "6492ef400257cf2601896cf7",
+                          "username": "namme",
+                          "email": "oprah123@gmail.com",
+                          "URLS": [
+                            "http://localhost:8000/nhAw1"
+                          ],
+                          "createdAt": "Wed Jun 21 2023 12:38:24 GMT+0000 (Coordinated Universal Time)",
+                          "__v": 1
+                        },
+                        {
+                          "_id": "6492f1c10257cf2601896d4c",
+                          "username": "john_doe",
+                          "email": "korkusco@gmail.com",
+                          "URLS": [
+                            "http://localhost:8000/kjIt6"
+                          ],
+                          "createdAt": "Wed Jun 21 2023 12:49:05 GMT+0000 (Coordinated Universal Time)",
+                          "__v": 1
+                        },
+                        {
+                          "_id": "6492fc470257cf2601896d97",
+                          "username": "Tife",
+                          "email": "farinubolu@gmail.com",
+                          "URLS": [
+                            "http://localhost:8000/Ols_y"
+                          ],
+                          "createdAt": "Wed Jun 21 2023 13:33:59 GMT+0000 (Coordinated Universal Time)",
+                          "__v": 1
+                        },
+                        {
+                          "_id": "64930648e4a2fd9b451f61b0",
+                          "username": "Mike",
+                          "email": "jakovjones866@gmail.com",
+                          "URLS": [
+                            "http://localhost:8000/Sent"
+                          ],
+                          "createdAt": "Wed Jun 21 2023 14:16:40 GMT+0000 (Coordinated Universal Time)",
+                          "__v": 1
+                        },
+                        {
+                          "_id": "64930bfae4a2fd9b451f61d5",
+                          "username": "Ronald",
+                          "email": "ronaldosunmu@gmail.com",
+                          "URLS": [
+                            "http://localhost:8000/2ShgF"
+                          ],
+                          "createdAt": "Wed Jun 21 2023 14:40:58 GMT+0000 (Coordinated Universal Time)",
+                          "__v": 1
+                        }
+                      ],
+                      "message": "Users retrieved successfully"
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "success": true,
+                      "status": "success",
+                      "statusCode": 200,
+                      "data": [
+                        {
+                          "_id": "648dad2f0d7b4cb08083200e",
+                          "username": "aphen",
+                          "email": "calebhickey19@gmail.com",
+                          "URLS": [
+                            "http://localhost:8000/zYzzf"
+                          ],
+                          "createdAt": "Sat Jun 17 2023 12:55:11 GMT+0000 (Coordinated Universal Time)",
+                          "__v": 1
+                        },
+                        {
+                          "_id": "648f23113cd1e987ef3309bd",
+                          "username": "Tobay_007",
+                          "email": "okeketobe009@gmail.com",
+                          "URLS": [],
+                          "createdAt": "Sun Jun 18 2023 15:30:25 GMT+0000 (Coordinated Universal Time)",
+                          "__v": 0
+                        },
+                        {
+                          "_id": "64904c6edb9695adfce6dc7d",
+                          "username": "tobisupreme",
+                          "email": "tobisupreme@getnada.com",
+                          "URLS": [
+                            "http://localhost:8000/o8W72"
+                          ],
+                          "createdAt": "Mon Jun 19 2023 12:39:10 GMT+0000 (Coordinated Universal Time)",
+                          "__v": 1
+                        },
+                        {
+                          "_id": "6490d7165a94f85d272cd8df",
+                          "username": "Tee",
+                          "email": "tonianwanya@yahoo.com",
+                          "URLS": [],
+                          "createdAt": "Mon Jun 19 2023 23:30:45 GMT+0100 (West Africa Standard Time)",
+                          "__v": 0
+                        }
+                      ],
+                      "message": "Users retrieved successfully"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-users",
+        "description": "Get all users ",
+        "tags": [
+          "User endpoints"
+        ]
+      }
+    },
+    "/api/user/{email}": {
+      "get": {
+        "summary": "Get One",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "_id": {
+                          "type": "string"
+                        },
+                        "username": {
+                          "type": "string"
+                        },
+                        "email": {
+                          "type": "string"
+                        },
+                        "URLS": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "createdAt": {
+                          "type": "string"
+                        },
+                        "__v": {
+                          "type": "integer"
+                        }
+                      }
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "x-examples": {
+                    "Example 1": {
+                      "success": true,
+                      "status": "success",
+                      "statusCode": 200,
+                      "data": {
+                        "_id": "64919bbe9d3654b7d6402d15",
+                        "username": "Tee",
+                        "email": "tonianwanya@yahoo.com",
+                        "URLS": [
+                          "http://localhost:8000/9ePLm",
+                          "http://localhost:8000/-NkC2",
+                          "http://localhost:8000/ZzNlD",
+                          "http://localhost:8000/HEqYm",
+                          "http://localhost:8000/T_r0D",
+                          "http://localhost:8000/aUZQm",
+                          "http://localhost:8000/2SkTA"
+                        ],
+                        "createdAt": "Tue Jun 20 2023 13:29:50 GMT+0100 (West Africa Standard Time)",
+                        "__v": 7
+                      },
+                      "message": "User retrieved successfully"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-api-user-email",
+        "description": "Get a single user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          },
+          "description": ""
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "email",
+            "description": "user email",
+            "required": true
+          }
+        ],
+        "tags": [
+          "User endpoints"
+        ]
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "email",
+          "in": "path",
+          "required": true,
+          "description": "email of the user"
+        }
+      ]
+    },
+    "/api/user/update/{id}": {
+      "put": {
+        "summary": "Update One",
+        "operationId": "put-api-user-update",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {}
+          }
+        },
+        "description": "Update user account",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "id",
+            "description": "User id",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "cookie",
+            "description": "token authentication",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "x-examples": {
+                  "Example 1": {
+                    "username": "you",
+                    "email": "tonianwanya@yahoo.com",
+                    "password": "Twinkle22@"
+                  }
+                },
+                "properties": {
+                  "username": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  },
+                  "cPassword": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "2fjbjs2hsbb37"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "User endpoints"
+        ]
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ]
+    },
+    "/api/user/delete/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "user id"
+        }
+      ],
+      "delete": {
+        "summary": "Delete One",
+        "operationId": "delete-api-user-delete-id",
+        "responses": {
+          "302": {
+            "description": "Redirecting to /"
+          }
+        },
+        "description": "Delete user account",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "id",
+            "description": "User id",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "cookie",
+            "description": "token authentication",
+            "required": true
+          }
+        ],
+        "tags": [
+          "User endpoints"
+        ]
+      }
+    },
+    "/api/shortify": {
+      "post": {
+        "summary": "Create URL",
+        "operationId": "post-api-shortify",
+        "responses": {
+          "302": {
+            "description": "Redirecting to /result.ejs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            },
+            "headers": {}
+          }
+        },
+        "description": "Create short url",
+        "tags": [
+          "Url endpoints"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "cookie",
+            "description": "token authentication"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "origUrl": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "g2vgy8daijrny"
+                    }
+                  },
+                  "customId": {
+                    "type": "string",
+                    "x-stoplight": {
+                      "id": "7r5pku4unpl1y"
+                    }
+                  }
+                },
+                "required": [
+                  "origUrl"
+                ]
+              }
+            }
+          },
+          "description": "{\n\"origUrl\": \"https://account.mongodb.com/account/login?n=%2Fv2%2F645fa5715ff26614c2b0b87b%23%2Fmetrics%2FreplicaSet%2F645fa5aaf20de86918e7c957%2Fexplorer%2Ftest%2Furls%2Ffind\",\n\"customId\": \"myfirsturl\"\n}"
+        }
+      }
+    },
+    "/api/shortify/history": {
+      "get": {
+        "summary": "Get Url History",
+        "responses": {
+          "302": {
+            "description": "Redirecting to / urlHistory.ejs\n"
+          }
+        },
+        "operationId": "get-api-shortify-history",
+        "description": "Get Url history of User",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "cookie",
+            "description": "token authentication"
+          }
+        ],
+        "tags": [
+          "Url endpoints"
+        ]
+      },
+      "parameters": []
+    },
+    "/api/shortify/analytics": {
+      "get": {
+        "summary": "Get Url Analytics",
+        "tags": [
+          "Url endpoints"
+        ],
+        "responses": {
+          "302": {
+            "description": "Redirecting to / analytics.ejs"
+          }
+        },
+        "operationId": "get-api-shortify-analytics",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "cookie",
+            "description": "token authentication"
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "username": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "URLS": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          }
+        },
+        "x-examples": {
+          "Example 1": {
+            "_id": "64919bbe9d3654b7d6402d15",
+            "username": "Test User",
+            "email": "test@yahoo.com",
+            "URLS": [
+              "http://localhost:8000/9ePLm",
+              "http://localhost:8000/-NkC2"
+            ],
+            "createdAt": "Tue Jun 20 2023 13:29:50 GMT+0100 (West Africa Standard Time)",
+            "updatedAt": "Tue Jun 20 2023 13:29:50 GMT+0100 (West Africa Standard Time)"
+          }
+        },
+        "description": "User schema",
+        "examples": [
+          {
+            "_id": "string",
+            "username": "string",
+            "email": "string",
+            "URLS": [
+              "string"
+            ],
+            "createdAt": "string",
+            "updatedAt": "string"
+          }
+        ]
+      },
+      "Url": {
+        "title": "Url",
+        "x-stoplight": {
+          "id": "l24mbo05z6phh"
+        },
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "object",
+            "x-stoplight": {
+              "id": "883kjtx8l2kwe"
+            },
+            "properties": {
+              "urlId": {
+                "type": "string",
+                "x-stoplight": {
+                  "id": "1vf5uwn8u90nj"
+                }
+              },
+              "origUrl": {
+                "type": "string",
+                "x-stoplight": {
+                  "id": "ngxa5o55v9axv"
+                }
+              },
+              "shortUrl": {
+                "type": "string",
+                "x-stoplight": {
+                  "id": "iecss1y4glh1i"
+                }
+              },
+              "historyUrl": {
+                "type": "string",
+                "x-stoplight": {
+                  "id": "fzbiul9ndurrr"
+                }
+              },
+              "  clicks: ": {
+                "type": "number",
+                "x-stoplight": {
+                  "id": "xn8nrspyx4kon"
+                }
+              },
+              "User": {
+                "$ref": "#/components/schemas/User",
+                "x-stoplight": {
+                  "id": "32qlk0gg0whtx"
+                }
+              },
+              "createdAt": {
+                "type": "string",
+                "x-stoplight": {
+                  "id": "egckn0y9fhuuu"
+                }
+              },
+              "clicker": {
+                "type": "array",
+                "x-stoplight": {
+                  "id": "47u05idm2v007"
+                },
+                "default": "none",
+                "items": {}
+              }
+            },
+            "required": [
+              "origUrl"
+            ]
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "cookie": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "jwt_token"
+      }
+    },
+    "requestBodies": {
+      "user-signup": {
+        "content": {}
+      }
+    }
+  }
+}
